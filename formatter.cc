@@ -39,8 +39,13 @@ std::string Join(const std::vector<std::string>& strings,
 }
 
 // Add quotes to a given string, in-place. Double quotes by default.
-void AddQuotes(std::string& s, bool use_single_quotes = false) {
-    const char quote = use_single_quotes ? "'" : "\"";
+void AddQuotes(std::string& s, const Quote& quote) {
+    char quote = '';
+    if (quote == DOUBLE) {
+        quote = '"';
+    } else if (quote == SINGLE) {
+        quote = '\'';
+    }
     s.insert(0, quote);
     s.push_back(quote);
 }
@@ -55,8 +60,8 @@ struct Options {
     Options(std::string delimeter, Quote quote)
             : delimiter(delimiter), quote(quote) {}
 
-    std::string delimiter;
-    Quote quote;
+    std::string delimiter = ",";
+    Quote quote = NONE;
 };
 
 
@@ -64,6 +69,16 @@ class Formatter {
   public:
     Formatter(Options input_options, Options output_options)
             : input_options_(input_options), output_options_(output_options) {}
+
+    std::string Reformat(std::string input) {
+        std::vector<std::string> tokens = Split(input, input_options_.delimiter);
+        if (output_options_.quote != NONE) {
+            for (std::string& s : tokens) {
+                AddQuotes(s, output_options_.quote);
+            }
+        }
+        return Join(tokens, output_options_.delimiter);
+    }
 
   private:
     Options input_options_;
