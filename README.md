@@ -16,7 +16,13 @@ source ./emsdk_env.sh
 ```
 
 To compile a C++ file with Emscripten:
+```
+emcc foo.cc
+```
 
+The above command will generate a JS file `a.out.js`, which can be included in the primary HTML file.
+
+To output an HTML file for debugging:
 ```
 emcc foo.cc -o foo.html
 ```
