@@ -35,3 +35,35 @@ python3 -m http.server
 
 Note that you may need to navigate to a particular URL, e.g. `http://0.0.0.0:8000/hello.html`.
 
+To use C++ functions in a JS file, functions must be bound:
+```
+// hello.cc
+#include <emscripten/bind.h>
+
+void PrintHello() {
+    printf("Hello there!");
+}
+
+EMSCRIPTEN_BINDINGS(my_module) {
+    emscripten::function("PrintHello", &PrintHello);
+}
+```
+
+imported asynchronously (for the WebAssembly compile time):
+```
+<!-- index.html -->
+<script>
+    var Module = {
+        onRuntimeInitialized: function() {
+            console.log(Module);
+            Module.PrintHello();
+        }
+    };
+</script>
+```
+
+and then compiled with Embind or WebIDL:
+```
+emcc -lembind -o hello.js hello.cc
+```
+
