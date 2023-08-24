@@ -1,12 +1,17 @@
-#import <string>
-#import <vector>
+#include <emscripten/bind.h>
+#include <iostream>
+#include <string>
+#include <vector>
 
 
 namespace {
 
+enum Quote { NONE, SINGLE, DOUBLE };
+
 // Given a string s, return a vector<string> of s split by the provided
 // delimiter.
-std::vector<int> Split(const std::string& s, const std::string& delimiter) {
+std::vector<std::string> Split(
+        const std::string& s, const std::string& delimiter) {
     std::vector<std::string> result;
     size_t left = 0;
     size_t right = s.find(delimiter, left);
@@ -15,7 +20,7 @@ std::vector<int> Split(const std::string& s, const std::string& delimiter) {
         left = right + 1;
         right = s.find(delimiter, left);
     }
-    result.push_back(std::stoi(s.substr(left)));
+    result.push_back(s.substr(left));
     return result;
 }
 
@@ -39,26 +44,21 @@ std::string Join(const std::vector<std::string>& strings,
 }
 
 // Add quotes to a given string, in-place. Double quotes by default.
-void AddQuotes(std::string& s, const Quote& quote) {
-    char quote = '';
-    if (quote == DOUBLE) {
-        quote = '"';
-    } else if (quote == SINGLE) {
+void AddQuotes(std::string& s, const Quote& quote_type) {
+    char quote = '"';
+    if (quote_type == SINGLE) {
         quote = '\'';
     }
-    s.insert(0, quote);
+    s.insert(s.begin(), quote);
     s.push_back(quote);
 }
 
 }  // namespace
 
 
-enum Quote { NONE, SINGLE, DOUBLE };
-
-
 struct Options {
     Options(std::string delimeter, Quote quote)
-            : delimiter(delimiter), quote(quote) {}
+            : delimiter(delimeter), quote(quote) {}
 
     std::string delimiter = ",";
     Quote quote = NONE;
@@ -83,7 +83,14 @@ class Formatter {
   private:
     Options input_options_;
     Options output_options_;
+};
+
+
+void PrintFormatHello() {
+    std::cout << "hello with std::cout" << std::endl;
 }
 
-
+EMSCRIPTEN_BINDINGS(my_module) {
+    emscripten::function("PrintFormatHello", &PrintFormatHello);
+}
 

@@ -67,3 +67,5 @@ and then compiled with Embind or WebIDL:
 emcc -lembind -o hello.js hello.cc
 ```
 
+Note that (it seems like) you can only have one Embind JS file.
+
