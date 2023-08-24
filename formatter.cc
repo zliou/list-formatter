@@ -86,8 +86,9 @@ class Formatter {
 };
 
 
-void PrintFormatHello() {
+void PrintFormatHello(std::string s) {
     std::cout << "hello with std::cout" << std::endl;
+    std::cout << "input: " << s << std::endl;
 }
 
 EMSCRIPTEN_BINDINGS(my_module) {

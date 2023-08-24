@@ -4,6 +4,12 @@ console.log("hello world");
 var Module = {
     onRuntimeInitialized: function() {
         console.log(Module);
-        Module.PrintFormatHello();
     }
 };
+
+function formatList() {
+    console.log("pressed");
+    inputText = document.getElementById("input").value;
+    Module.PrintFormatHello(inputText);
+}
+
