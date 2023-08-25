@@ -26,7 +26,7 @@ function formatList() {
             document.getElementById("add-newlines").checked,
             document.getElementById("add-trailing-delimiter").checked,
             document.getElementById("sort-output").checked);
-    document.getElementById("output").innerHTML = result;
+    document.getElementById("output").value = result;
 }
 
 // TODO: Add "copy" button to index.html when HTTPS is supported. The Clipboard
