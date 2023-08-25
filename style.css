@@ -1,5 +1,9 @@
 * {
-    font-family: sans-serif;
+    font-family: "Inter", sans-serif;
+}
+
+textarea {
+    font-family: "Courier Prime", monospace;
 }
 
 body {
