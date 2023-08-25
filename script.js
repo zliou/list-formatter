@@ -2,7 +2,7 @@
 var Module = {
     onRuntimeInitialized: function() {
         document.getElementById("button-format").removeAttribute("disabled");
-        console.log("Formatter ready!");
+        console.log("Formatter is ready!");
     }
 };
 
@@ -10,13 +10,21 @@ function formatList() {
     inputText = document.getElementById("input").value;
     var result = Module.MakeOptionsAndReformat(
             inputText,
+            // Input options
+            document.getElementById("has-double-quotes").checked,
+            document.getElementById("has-single-quotes").checked,
+            document.getElementById("has-single-spaces").checked,
+            document.getElementById("has-variable-spaces").checked,
+            document.getElementById("has-commas").checked,
+            document.getElementById("has-newlines").checked,
+            document.getElementById("has-trailing-delimiter").checked,
+            // Output options
             document.getElementById("add-double-quotes").checked,
             document.getElementById("add-single-quotes").checked,
             document.getElementById("add-commas").checked,
             document.getElementById("add-spaces").checked,
             document.getElementById("add-newlines").checked,
-            document.getElementById("sort-output").checked,
-            document.getElementById("reverse-sort-output").checked);
+            document.getElementById("sort-output").checked);
     document.getElementById("output").innerHTML = result;
 }
 

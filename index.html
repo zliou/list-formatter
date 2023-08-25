@@ -18,29 +18,64 @@
     <textarea id="input" rows="10" cols="50"></textarea>
     <br/>
 
-    <input id="add-double-quotes" type="checkbox"/>
-    <label for="add-double-quotes">Add double quotes</label>
-    <br/>
+    <div id="input-options-container">
+        <h3>Input options</h3>
+        <input id="has-double-quotes" type="checkbox"/>
+        <label for="has-double-quotes">Has double quotes</label>
+        <br/>
 
-    <input id="add-single-quotes" type="checkbox"/>
-    <label for="add-single-quotes">Add single quotes</label>
-    <br/>
+        <input id="has-single-quotes" type="checkbox"/>
+        <label for="has-single-quotes">Has single quotes</label>
+        <br/>
 
-    <input id="add-commas" type="checkbox"/>
-    <label for="add-commas">Add commas</label>
-    <br/>
+        <input id="has-single-spaces" type="checkbox"/>
+        <label for="has-single-spaces">Is separated by (single) spaces</label>
+        <br/>
 
-    <input id="add-spaces" type="checkbox"/>
-    <label for="add-spaces">Add spaces</label>
-    <br/>
+        <input id="has-variable-spaces" type="checkbox"/>
+        <label for="has-variable-spaces">Is separated by multiple/variable spaces</label>
+        <br/>
 
-    <input id="add-newlines" type="checkbox"/>
-    <label for="add-newlines">Add line breaks</label>
-    <br/>
+        <input id="has-commas" type="checkbox"/>
+        <label for="has-commas">Is separated by commas</label>
+        <br/>
 
-    <input id="sort-output" type="checkbox"/>
-    <label for="sort-output">Sort output</label>
-    <br/>
+        <input id="has-newlines" type="checkbox"/>
+        <label for="has-newlines">Is separated by line breaks</label>
+        <br/>
+
+        <input id="has-trailing-delimiter" type="checkbox"/>
+        <label for="has-trailing-delimiter">Has a trailing delimiter</label>
+        <br/>
+    </div>
+
+    <div id="output-options-container">
+        <h3>Output options</h3>
+
+        <input id="add-double-quotes" type="checkbox"/>
+        <label for="add-double-quotes">Add double quotes</label>
+        <br/>
+
+        <input id="add-single-quotes" type="checkbox"/>
+        <label for="add-single-quotes">Add single quotes</label>
+        <br/>
+
+        <input id="add-commas" type="checkbox"/>
+        <label for="add-commas">Add commas</label>
+        <br/>
+
+        <input id="add-spaces" type="checkbox"/>
+        <label for="add-spaces">Add spaces</label>
+        <br/>
+
+        <input id="add-newlines" type="checkbox"/>
+        <label for="add-newlines">Add line breaks</label>
+        <br/>
+
+        <input id="sort-output" type="checkbox"/>
+        <label for="sort-output">Sort output</label>
+        <br/>
+    </div>
 
     <br/>
     <button id="button-format" disabled="true" onclick="formatList()">Format</button>

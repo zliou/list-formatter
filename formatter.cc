@@ -25,13 +25,28 @@ std::string Reformat(std::string input,
 // Converts form-provided values to Option structs and calls Reformat.
 std::string MakeOptionsAndReformat(
         std::string input,
+        // Input options
+        bool input_has_double_quotes,
+        bool input_has_single_quotes,
+        bool input_has_single_spaces,
+        bool input_has_variable_spaces,
+        bool input_has_commas,
+        bool input_has_newlines,
+        bool input_has_trailing_delimiter,
+        // Output options
         bool add_double_quotes_to_output,
         bool add_single_quotes_to_output,
         bool add_commas_to_output,
         bool add_spaces_to_output,
         bool add_newlines_to_output,
         bool sort_output) {
-    Options default_input_options(",", Quote::NONE, /*sorted=*/false);
+    Options input_options(
+            TranslateDelimiterFromOptions(input_has_commas,
+                                          input_has_single_spaces,
+                                          input_has_newlines),
+            TranslateQuoteFromOptions(input_has_double_quotes,
+                                      input_has_single_quotes),
+            /*sorted=*/false);
     Options output_options(
             TranslateDelimiterFromOptions(add_commas_to_output,
                                           add_spaces_to_output,
@@ -39,7 +54,7 @@ std::string MakeOptionsAndReformat(
             TranslateQuoteFromOptions(add_double_quotes_to_output,
                                       add_single_quotes_to_output),
             /*sorted=*/sort_output);
-    return Reformat(input, default_input_options, output_options);
+    return Reformat(input, input_options, output_options);
 }
 
 
