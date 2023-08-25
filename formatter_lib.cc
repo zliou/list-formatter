@@ -18,14 +18,24 @@ struct Options {
 
 // Given a string s, return a vector<string> of s split by the provided
 // delimiter.
+// a, b, c, d
+// 0123456789
+//    lr
 std::vector<std::string> Split(
         const std::string& s, const std::string& delimiter) {
     std::vector<std::string> result;
+    if (delimiter.empty()) {
+        for (const char& c : s) {
+            result.push_back(std::string(/*size=*/1, c));
+        }
+        return result;
+    }
+
     size_t left = 0;
     size_t right = s.find(delimiter, left);
     while (right != std::string::npos) {
-        result.push_back(s.substr(left, right - left + 1));
-        left = right + 1;
+        result.push_back(s.substr(left, right - left));
+        left = right + delimiter.size();
         right = s.find(delimiter, left);
     }
     result.push_back(s.substr(left));
@@ -53,8 +63,11 @@ std::string Join(const std::vector<std::string>& strings,
 
 // Add quotes to a given string, in-place. Double quotes by default.
 void AddQuotes(std::string& s, const Quote& quote_type) {
+    if (quote_type == Quote::NONE) {
+        return;
+    }
     char quote = '"';
-    if (quote_type == SINGLE) {
+    if (quote_type == Quote::SINGLE) {
         quote = '\'';
     }
     s.insert(s.begin(), quote);
