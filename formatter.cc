@@ -1,5 +1,6 @@
 #include "formatter_lib.cc"
 
+#include <algorithm>
 #include <emscripten/bind.h>
 #include <iostream>
 #include <string>
@@ -10,7 +11,10 @@
 std::string Reformat(std::string input,
                      Options input_options, Options output_options) {
     std::vector<std::string> tokens = Split(input, input_options.delimiter);
-    if (output_options.quote != NONE) {
+    if (output_options.sorted) {
+        std::sort(tokens.begin(), tokens.end());
+    }
+    if (output_options.quote != Quote::NONE) {
         for (std::string& s : tokens) {
             AddQuotes(s, output_options.quote);
         }
@@ -25,14 +29,16 @@ std::string MakeOptionsAndReformat(
         bool add_single_quotes_to_output,
         bool add_commas_to_output,
         bool add_spaces_to_output,
-        bool add_newlines_to_output) {
-    Options default_input_options(",", Quote::NONE);
+        bool add_newlines_to_output,
+        bool sort_output) {
+    Options default_input_options(",", Quote::NONE, /*sorted=*/false);
     Options output_options(
             TranslateDelimiterFromOptions(add_commas_to_output,
                                           add_spaces_to_output,
                                           add_newlines_to_output),
             TranslateQuoteFromOptions(add_double_quotes_to_output,
-                                      add_single_quotes_to_output));
+                                      add_single_quotes_to_output),
+            /*sorted=*/sort_output);
     return Reformat(input, default_input_options, output_options);
 }
 

@@ -38,8 +38,12 @@
     <label for="add-newlines">Add line breaks</label>
     <br/>
 
+    <input id="sort-output" type="checkbox"/>
+    <label for="sort-output">Sort output</label>
     <br/>
-    <button onclick="formatList()">Convert</button>
+
+    <br/>
+    <button id="button-format" disabled="true" onclick="formatList()">Format</button>
 
     <h2>Output:</h2>
     <div id="output"></div>

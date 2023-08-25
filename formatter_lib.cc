@@ -9,18 +9,16 @@ namespace {
 enum Quote { NONE, SINGLE, DOUBLE };
 
 struct Options {
-    Options(std::string delimeter, Quote quote)
-            : delimiter(delimeter), quote(quote) {}
+    Options(std::string delimeter, Quote quote, bool sorted)
+            : delimiter(delimeter), quote(quote), sorted(sorted) {}
 
     std::string delimiter = ",";
     Quote quote = NONE;
+    bool sorted = false;
 };
 
 // Given a string s, return a vector<string> of s split by the provided
 // delimiter.
-// a, b, c, d
-// 0123456789
-//    lr
 std::vector<std::string> Split(
         const std::string& s, const std::string& delimiter) {
     std::vector<std::string> result;
