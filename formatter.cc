@@ -30,7 +30,6 @@ std::string MakeOptionsAndReformat(
         bool input_has_double_quotes,
         bool input_has_single_quotes,
         bool input_has_single_spaces,
-        bool input_has_variable_spaces,
         bool input_has_commas,
         bool input_has_newlines,
         bool input_has_trailing_delimiter,

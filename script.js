@@ -14,7 +14,6 @@ function formatList() {
             document.getElementById("has-double-quotes").checked,
             document.getElementById("has-single-quotes").checked,
             document.getElementById("has-single-spaces").checked,
-            document.getElementById("has-variable-spaces").checked,
             document.getElementById("has-commas").checked,
             document.getElementById("has-newlines").checked,
             document.getElementById("has-trailing-delimiter").checked,
