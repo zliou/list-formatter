@@ -13,75 +13,94 @@
 
     <h2>Input:</h2>
 
-    <label for="input">Paste your list text here.</label>
-    <br/>
-    <textarea id="input" rows="10" cols="50"></textarea>
-    <br/>
+    <div id="input-text-area-container">
+        <div id="input-textarea-label">
+            <label for="input">Paste your list text here.</label>
+        </div>
+        <textarea id="input" rows="10" cols="50"></textarea>
+    </div>
 
     <div id="input-options-container">
         <h3>Input options</h3>
-        <input id="has-double-quotes" type="checkbox"/>
-        <label for="has-double-quotes">Has double quotes</label>
-        <br/>
 
-        <input id="has-single-quotes" type="checkbox"/>
-        <label for="has-single-quotes">Has single quotes</label>
-        <br/>
+        <div class="option">
+            <input id="has-double-quotes" type="checkbox"/>
+            <label for="has-double-quotes">Has double quotes</label>
+        </div>
 
-        <input id="has-single-spaces" type="checkbox"/>
-        <label for="has-single-spaces">Is separated by (single) spaces</label>
-        <br/>
+        <div class="option">
+            <input id="has-single-quotes" type="checkbox"/>
+            <label for="has-single-quotes">Has single quotes</label>
+        </div>
 
-        <input id="has-commas" type="checkbox"/>
-        <label for="has-commas">Is separated by commas</label>
-        <br/>
+        <div class="option">
+            <input id="has-single-spaces" type="checkbox"/>
+            <label for="has-single-spaces">Is separated by (single) spaces</label>
+        </div>
 
-        <input id="has-newlines" type="checkbox"/>
-        <label for="has-newlines">Is separated by line breaks</label>
-        <br/>
+        <div class="option">
+            <input id="has-commas" type="checkbox"/>
+            <label for="has-commas">Is separated by commas</label>
+        </div>
 
-        <input id="has-trailing-delimiter" type="checkbox"/>
-        <label for="has-trailing-delimiter">Has a trailing delimiter</label>
-        <br/>
+        <div class="option">
+            <input id="has-newlines" type="checkbox"/>
+            <label for="has-newlines">Is separated by line breaks</label>
+        </div>
+
+        <div class="option">
+            <input id="has-trailing-delimiter" type="checkbox"/>
+            <label for="has-trailing-delimiter">Has a trailing delimiter</label>
+        </div>
     </div>
 
     <div id="output-options-container">
         <h3>Output options</h3>
 
-        <input id="add-double-quotes" type="checkbox"/>
-        <label for="add-double-quotes">Add double quotes</label>
-        <br/>
+        <div class="option">
+            <input id="add-double-quotes" type="checkbox"/>
+            <label for="add-double-quotes">Add double quotes</label>
+        </div>
 
-        <input id="add-single-quotes" type="checkbox"/>
-        <label for="add-single-quotes">Add single quotes</label>
-        <br/>
+        <div class="option">
+            <input id="add-single-quotes" type="checkbox"/>
+            <label for="add-single-quotes">Add single quotes</label>
+        </div>
 
-        <input id="add-commas" type="checkbox"/>
-        <label for="add-commas">Add commas</label>
-        <br/>
+        <div class="option">
+            <input id="add-commas" type="checkbox"/>
+            <label for="add-commas">Add commas</label>
+        </div>
 
-        <input id="add-spaces" type="checkbox"/>
-        <label for="add-spaces">Add spaces</label>
-        <br/>
+        <div class="option">
+            <input id="add-spaces" type="checkbox"/>
+            <label for="add-spaces">Add spaces</label>
+        </div>
 
-        <input id="add-newlines" type="checkbox"/>
-        <label for="add-newlines">Add line breaks</label>
-        <br/>
+        <div class="option">
+            <input id="add-newlines" type="checkbox"/>
+            <label for="add-newlines">Add line breaks</label>
+        </div>
 
-        <input id="add-trailing-delimiter" type="checkbox"/>
-        <label for="add-trailing-delimiter">Add trailing delimiter</label>
-        <br/>
+        <div class="option">
+            <input id="add-trailing-delimiter" type="checkbox"/>
+            <label for="add-trailing-delimiter">Add trailing delimiter</label>
+        </div>
 
-        <input id="sort-output" type="checkbox"/>
-        <label for="sort-output">Sort output</label>
-        <br/>
+        <div class="option">
+            <input id="sort-output" type="checkbox"/>
+            <label for="sort-output">Sort output</label>
+        </div>
     </div>
 
-    <br/>
-    <button id="button-format" disabled="true" onclick="formatList()">Format</button>
+    <div id="button-format-container">
+        <button id="button-format" disabled="true" onclick="formatList()">Format</button>
+    </div>
 
-    <h2>Output:</h2>
-    <textarea id="output" rows="10" cols="50"></textarea>
-    <!-- <button onclick="writeOutputToClipboard()">Copy</button> -->
+    <div id="output-contianer">
+        <h2>Output:</h2>
+        <textarea id="output" rows="10" cols="50"></textarea>
+        <!-- <button onclick="writeOutputToClipboard()">Copy</button> -->
+    </div>
 </body>
 </html>
