@@ -47,3 +47,5 @@ Then, run the executable to test.
 ./formatter_lib_test.out
 ```
 
+![Sample image of the formatter tool.](demo.png)
+
