@@ -84,6 +84,8 @@ void RunTests() {
     Test("SplitLongDelimiterSuccess",
          Split("alonglongblonglongc", "longlong"), {"a","b","c"});
     Test("SplitEmptyDelimiterSuccess", Split("abc", ""), {"a","b","c"});
+    Test("SplitTrailingDelimiterSuccess",
+         Split("a,b,c,", ",", /*has_trailing_delimiter=*/true), {"a","b","c"});
 
     // Returning a list with single empty string matches py3 behavior.
     Test("SplitEmptyListSuccess", Split("", ","), {""});

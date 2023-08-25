@@ -10,7 +10,8 @@
 // Given an input and input/output Options, output the reformatted string.
 std::string Reformat(std::string input,
                      Options input_options, Options output_options) {
-    std::vector<std::string> tokens = Split(input, input_options.delimiter);
+    std::vector<std::string> tokens = Split(
+            input, input_options.delimiter, input_options.trailing_delimiter);
     if (output_options.sorted) {
         std::sort(tokens.begin(), tokens.end());
     }
@@ -19,7 +20,7 @@ std::string Reformat(std::string input,
             AddQuotes(s, output_options.quote);
         }
     }
-    return Join(tokens, output_options.delimiter);
+    return Join(tokens, output_options.delimiter, output_options.trailing_delimiter);
 }
 
 // Converts form-provided values to Option structs and calls Reformat.
@@ -39,6 +40,7 @@ std::string MakeOptionsAndReformat(
         bool add_commas_to_output,
         bool add_spaces_to_output,
         bool add_newlines_to_output,
+        bool add_trailing_delimiter_to_output,
         bool sort_output) {
     Options input_options(
             TranslateDelimiterFromOptions(input_has_commas,
@@ -46,14 +48,16 @@ std::string MakeOptionsAndReformat(
                                           input_has_newlines),
             TranslateQuoteFromOptions(input_has_double_quotes,
                                       input_has_single_quotes),
-            /*sorted=*/false);
+            /*sorted=*/false,
+            /*trailing_delimiter=*/input_has_trailing_delimiter);
     Options output_options(
             TranslateDelimiterFromOptions(add_commas_to_output,
                                           add_spaces_to_output,
                                           add_newlines_to_output),
             TranslateQuoteFromOptions(add_double_quotes_to_output,
                                       add_single_quotes_to_output),
-            /*sorted=*/sort_output);
+            /*sorted=*/sort_output,
+            /*trailing_delimiter=*/add_trailing_delimiter_to_output);
     return Reformat(input, input_options, output_options);
 }
 

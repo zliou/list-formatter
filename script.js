@@ -24,6 +24,7 @@ function formatList() {
             document.getElementById("add-commas").checked,
             document.getElementById("add-spaces").checked,
             document.getElementById("add-newlines").checked,
+            document.getElementById("add-trailing-delimiter").checked,
             document.getElementById("sort-output").checked);
     document.getElementById("output").innerHTML = result;
 }

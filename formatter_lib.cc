@@ -9,18 +9,21 @@ namespace {
 enum Quote { NONE, SINGLE, DOUBLE };
 
 struct Options {
-    Options(std::string delimeter, Quote quote, bool sorted)
-            : delimiter(delimeter), quote(quote), sorted(sorted) {}
+    Options(std::string delimiter, Quote quote, bool sorted, bool trailing_delimiter)
+            : delimiter(delimiter), quote(quote), sorted(sorted), 
+              trailing_delimiter(trailing_delimiter) {}
 
     std::string delimiter = ",";
     Quote quote = NONE;
     bool sorted = false;
+    bool trailing_delimiter = false;
 };
 
 // Given a string s, return a vector<string> of s split by the provided
 // delimiter.
 std::vector<std::string> Split(
-        const std::string& s, const std::string& delimiter) {
+        const std::string& s, const std::string& delimiter,
+        bool has_trailing_delimiter = false) {
     std::vector<std::string> result;
     if (delimiter.empty()) {
         for (const char& c : s) {
@@ -36,7 +39,10 @@ std::vector<std::string> Split(
         left = right + delimiter.size();
         right = s.find(delimiter, left);
     }
-    result.push_back(s.substr(left));
+    // If there is a trailing delimiter, ignore the content after the last delimiter.
+    if (!has_trailing_delimiter) {
+        result.push_back(s.substr(left));
+    }
     return result;
 }
 
