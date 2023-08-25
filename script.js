@@ -28,6 +28,8 @@ function formatList() {
     document.getElementById("output").value = result;
 }
 
+// TODO: Implement support for variable-number spaces.
+
 // TODO: Add "copy" button to index.html when HTTPS is supported. The Clipboard
 //       API is only available over HTTPS contexts.
 //       (https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)

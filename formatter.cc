@@ -20,7 +20,8 @@ std::string Reformat(std::string input,
             AddQuotes(s, output_options.quote);
         }
     }
-    return Join(tokens, output_options.delimiter, output_options.trailing_delimiter);
+    return Join(tokens, output_options.delimiter,
+                output_options.trailing_delimiter);
 }
 
 // Converts form-provided values to Option structs and calls Reformat.
