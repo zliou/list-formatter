@@ -3,8 +3,8 @@
 <head>
     <title>List Formatter</title>
 
-    <link rel="stylesheet" src="style.css">
-    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'/>
     <script src="script.js"></script>
     <script src="formatter.js"></script>
 </head>
@@ -15,7 +15,7 @@
 
     <label for="input">Paste your list text here.</label>
     <br/>
-    <textarea id="input"></textarea>
+    <textarea id="input" rows="10" cols="50"></textarea>
     <br/>
 
     <input id="add-double-quotes" type="checkbox"/>
@@ -38,6 +38,7 @@
     <label for="add-newlines">Add line breaks</label>
     <br/>
 
+    <br/>
     <button onclick="formatList()">Convert</button>
 
     <h2>Output:</h2>
