@@ -28,7 +28,7 @@ Navigate to:
 
 ```
 http://0.0.0.0:8000/
-``
+```
 
 To view C++ changes, recompile `formatter.cc` and refresh the page.
 
