@@ -69,3 +69,16 @@ emcc -lembind -o hello.js hello.cc
 
 Note that (it seems like) you can only have one Embind JS file.
 
+
+## Testing
+
+First, compile `formatter_lib_test.cc`.
+```
+g++ formatter_lib_test.cc -o formatter_lib_test.out
+```
+
+Then, run the executable to test.
+```
+./formatter_lib_test.out
+```
+

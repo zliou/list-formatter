@@ -7,7 +7,6 @@ var Module = {
 
 function formatList() {
     inputText = document.getElementById("input").value;
-    Module.PrintFormatHello(inputText);
     var result = Module.MakeOptionsAndReformat(
             inputText,
             document.getElementById("add-double-quotes").checked,
