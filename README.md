@@ -4,70 +4,35 @@ Created: 2023 August 18
 
 Author: Zachary Liou
 
-This is a C++ WASM library for formatting lists of strings.
+This is a tool to help re-format a list of strings with to have quotes, commas,
+and other delimiters.
+
+This project was made as a way to learn and explore WebAssembly with C++
+(using Emscripten). Check out `LEARNING_NOTES.md` for some lessons learned!
+
 
 ## Instructions
 
-To activate PATH variables:
-
+To compile the formatter with Emscripten and Lembind:
 ```
-cd emsdk
-source ./emsdk_env.sh
+emcc -lembind formatter.cc -o formatter.js
 ```
 
-To compile a C++ file with Emscripten:
-```
-emcc foo.cc
-```
-
-The above command will generate a JS file `a.out.js`, which can be included in the primary HTML file.
-
-To output an HTML file for debugging:
-```
-emcc foo.cc -o foo.html
-```
-
-To run it on a local server:
+Run a local HTTP server:
 
 ```
 python3 -m http.server
 ```
 
-Note that you may need to navigate to a particular URL, e.g. `http://0.0.0.0:8000/hello.html`.
+Navigate to:
 
-To use C++ functions in a JS file, functions must be bound:
 ```
-// hello.cc
-#include <emscripten/bind.h>
+http://0.0.0.0:8000/
+``
 
-void PrintHello() {
-    printf("Hello there!");
-}
+To view C++ changes, recompile `formatter.cc` and refresh the page.
 
-EMSCRIPTEN_BINDINGS(my_module) {
-    emscripten::function("PrintHello", &PrintHello);
-}
-```
-
-imported asynchronously (for the WebAssembly compile time):
-```
-<!-- index.html -->
-<script>
-    var Module = {
-        onRuntimeInitialized: function() {
-            console.log(Module);
-            Module.PrintHello();
-        }
-    };
-</script>
-```
-
-and then compiled with Embind or WebIDL:
-```
-emcc -lembind -o hello.js hello.cc
-```
-
-Note that (it seems like) you can only have one Embind JS file.
+To view JS, HTML, and CSS changes, simply refresh the page.
 
 
 ## Testing
