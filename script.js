@@ -1,6 +1,4 @@
 
-console.log("hello world");
-
 var Module = {
     onRuntimeInitialized: function() {
         console.log(Module);
@@ -8,14 +6,22 @@ var Module = {
 };
 
 function formatList() {
-    console.log("pressed");
     inputText = document.getElementById("input").value;
-    console.log("add-double-quotes: " + 
-            document.getElementById("add-double-quotes").checked);
-    console.log("add-single-quotes: " + 
-            document.getElementById("add-single-quotes").checked);
-    console.log("add-commas: " + 
-            document.getElementById("add-commas").checked);
     Module.PrintFormatHello(inputText);
+    var result = Module.MakeOptionsAndReformat(
+            inputText,
+            document.getElementById("add-double-quotes").checked,
+            document.getElementById("add-single-quotes").checked,
+            document.getElementById("add-commas").checked,
+            document.getElementById("add-spaces").checked,
+            document.getElementById("add-newlines").checked);
+    document.getElementById("output").innerHTML = result;
+}
+
+// TODO: Add "copy" button to index.html when HTTPS is supported. The Clipboard
+//       API is only available over HTTPS contexts.
+//       (https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
+function writeOutputToClipboard() {
+    navigator.clipboard.writeText(document.getElementById("output").value);
 }
 

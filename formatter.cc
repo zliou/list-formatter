@@ -8,6 +8,14 @@ namespace {
 
 enum Quote { NONE, SINGLE, DOUBLE };
 
+struct Options {
+    Options(std::string delimeter, Quote quote)
+            : delimiter(delimeter), quote(quote) {}
+
+    std::string delimiter = ",";
+    Quote quote = NONE;
+};
+
 // Given a string s, return a vector<string> of s split by the provided
 // delimiter.
 std::vector<std::string> Split(
@@ -53,45 +61,67 @@ void AddQuotes(std::string& s, const Quote& quote_type) {
     s.push_back(quote);
 }
 
-}  // namespace
-
-
-struct Options {
-    Options(std::string delimeter, Quote quote)
-            : delimiter(delimeter), quote(quote) {}
-
-    std::string delimiter = ",";
-    Quote quote = NONE;
-};
-
-
-class Formatter {
-  public:
-    Formatter(Options input_options, Options output_options)
-            : input_options_(input_options), output_options_(output_options) {}
-
-    std::string Reformat(std::string input) {
-        std::vector<std::string> tokens = Split(input, input_options_.delimiter);
-        if (output_options_.quote != NONE) {
-            for (std::string& s : tokens) {
-                AddQuotes(s, output_options_.quote);
-            }
-        }
-        return Join(tokens, output_options_.delimiter);
+Quote TranslateQuoteFromOptions(
+        bool add_double_quotes, bool add_single_quotes) {
+    if (add_double_quotes) {
+        return Quote::DOUBLE;
+    } else if (add_single_quotes) {
+        return Quote::SINGLE;
+    } else {
+        return Quote::NONE;
     }
-
-  private:
-    Options input_options_;
-    Options output_options_;
-};
-
-
-void PrintFormatHello(std::string s) {
-    std::cout << "hello with std::cout" << std::endl;
-    std::cout << "input: " << s << std::endl;
 }
 
+std::string TranslateDelimiterFromOptions(
+        bool add_commas, bool add_space, bool add_newline) {
+    std::string delimiter = "";
+    if (add_commas) {
+        delimiter += ",";
+    }
+    if (add_space) {
+        delimiter += " ";
+    }
+    if (add_newline) {
+        delimiter += "\n";
+    }
+    return delimiter;
+}
+
+}  // namespace
+
+// Given an input and input/output Options, output the reformatted string.
+std::string Reformat(std::string input,
+                     Options input_options, Options output_options) {
+    std::vector<std::string> tokens = Split(input, input_options.delimiter);
+    if (output_options.quote != NONE) {
+        for (std::string& s : tokens) {
+            AddQuotes(s, output_options.quote);
+        }
+    }
+    return Join(tokens, output_options.delimiter);
+}
+
+// Converts form-provided values to Option structs and calls Reformat.
+std::string MakeOptionsAndReformat(
+        std::string input,
+        bool add_double_quotes_to_output,
+        bool add_single_quotes_to_output,
+        bool add_commas_to_output,
+        bool add_spaces_to_output,
+        bool add_newlines_to_output) {
+    Options default_input_options(",", Quote::NONE);
+    Options output_options(
+            TranslateDelimiterFromOptions(add_commas_to_output,
+                                          add_spaces_to_output,
+                                          add_newlines_to_output),
+            TranslateQuoteFromOptions(add_double_quotes_to_output,
+                                      add_single_quotes_to_output));
+    return Reformat(input, default_input_options, output_options);
+}
+
+
 EMSCRIPTEN_BINDINGS(my_module) {
-    emscripten::function("PrintFormatHello", &PrintFormatHello);
+    emscripten::function("Reformat", &Reformat);
+    emscripten::function("MakeOptionsAndReformat", &MakeOptionsAndReformat);
 }
 
