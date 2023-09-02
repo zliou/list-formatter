@@ -4,6 +4,8 @@ Created: 2023 August 18
 
 Author: Zachary Liou
 
+[Try it here!](http://zachliou.com/formatter)
+
 This is a tool to help re-format a list of strings with to have quotes, commas,
 and other delimiters.
 
